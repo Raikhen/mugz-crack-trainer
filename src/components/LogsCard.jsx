@@ -88,7 +88,7 @@ export default function LogsCard({ logs }) {
   }
 
   return (
-    <Card className="w-full">
+    <Card className="w-full shadow-xl">
       <CardHeader>
         <CardTitle>Logbook</CardTitle>
       </CardHeader>

@@ -3,10 +3,11 @@ import Image from "next/image";
 
 import ClimbCard from "./ClimbCard";
 import LogsCard from "./LogsCard";
-// import { getAuth, signOut } from "firebase/auth";
-// import { app } from "/lib/firebase/config";
+import { app } from "../lib/firebase/config";
 
 export default function Dashboard({ routes, logs }) {
+  console.log(app)
+
   return (
     <div className="flex flex-col">
       <Image
@@ -16,7 +17,7 @@ export default function Dashboard({ routes, logs }) {
         src="/snowy.jpeg"
         className="fixed -z-10 min-h-screen opacity-100"
       />
-      <header className="fixed min-w-full flex items-center justify-center px-4 py-4 border-b shadow lg:px-6 text-center">
+      <header className="fixed min-w-full flex items-center justify-center px-4 py-4 border-b shadow-xl lg:px-6 text-center bg-white">
         <h1 className="text-xl font-bold sm:text-2xl">Mugz Crack Trainer</h1>
       </header>
       <main className="mt-20">

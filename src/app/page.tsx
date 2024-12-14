@@ -1,28 +1,73 @@
 import Dashboard from "@/components/Dashboard";
 
-const routes = [
-  {
-    id: 1,
-    name: 'Fists',
-    colors: ['Blue', 'Blue', 'Blue']
-  }
-]
 
-const logbook = [
-  { id: 1, climber: "Alex Honnold", date: "2023-06-15", route: "El Capitan", laps: 1 },
-  { id: 2, climber: "Adam Ondra", date: "2023-06-14", route: "Silence", laps: 3 },
-  { id: 3, climber: "Janja Garnbret", date: "2023-06-13", route: "Biographie", laps: 2 },
-  { id: 4, climber: "Tommy Caldwell", date: "2023-06-12", route: "Dawn Wall", laps: 1 },
-  { id: 5, climber: "Ashima Shiraishi", date: "2023-06-11", route: "Open Your Mind Direct", laps: 4 },
-  { id: 6, climber: "Chris Sharma", date: "2023-06-10", route: "La Dura Dura", laps: 2 },
-  { id: 7, climber: "Margo Hayes", date: "2023-06-09", route: "Biographie", laps: 1 },
-  { id: 8, climber: "Alex Megos", date: "2023-06-08", route: "Bibliographie", laps: 3 },
-  { id: 9, climber: "Sasha DiGiulian", date: "2023-06-07", route: "Pure Imagination", laps: 2 },
-  { id: 10, climber: "Stefano Ghisolfi", date: "2023-06-06", route: "Perfecto Mundo", laps: 1 },
-  { id: 11, climber: "Nina Williams", date: "2023-06-05", route: "Ambrosia", laps: 2 },
-  { id: 12, climber: "Daniel Woods", date: "2023-06-04", route: "The Process", laps: 3 },
-]
+import db from "../lib/firebase/firestore";
+import { collection, getDocs, Timestamp } from "firebase/firestore";
 
-export default function Home() {
-  return (<Dashboard routes={routes} logs={logbook} />);
+interface Route {
+  id: string,
+  name: string,
+  colors: string[],
+}
+
+async function getRoutes() : Promise<Route[]> {
+  // Reference the 'routes' collection
+  const routesRef = collection(db, "routes");
+
+  // Execute the query
+  const querySnapshot = await getDocs(routesRef);
+
+  // Extract the route documents
+  const routes : Route[] = [];
+
+  querySnapshot.forEach((doc) => {
+    routes.push({
+      id: doc.id,
+      name: doc.data().name,
+      colors: doc.data().colors
+    });
+  });
+
+  return routes;
+}
+
+
+interface Log {
+  id: string,
+  climber: string,
+  date: string,
+  route: string,
+  laps: number,
+}
+
+async function getLogs(routes : Route[]) : Promise<Log[]> {
+  // Reference the 'routes' collection
+  const logsRef = collection(db, "logs");
+
+  // Execute the query
+  const querySnapshot = await getDocs(logsRef);
+
+  // Extract the route documents
+  const logs : Log[] = [];
+
+  querySnapshot.forEach((doc) => {
+    const routeName = routes.find((route : Route) => route.id === doc.data().route.id)?.name;
+
+    logs.push({
+      id: doc.id,
+      climber: doc.data().climber,
+      date: doc.data().date.toDate().toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: '2-digit' }),
+      route: routeName!,
+      laps: doc.data().laps
+    });
+  });
+
+  return logs;
+}
+
+export default async function Home() {
+  const routes = await getRoutes();
+  const logs = await getLogs(routes);
+
+  return (<Dashboard routes={routes} logs={logs} />);
 }

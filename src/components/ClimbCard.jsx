@@ -11,6 +11,7 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 export default function ClimbCard({ routes }) {
   const [selectedRoute, setSelectedRoute] = useState("");
@@ -25,11 +26,12 @@ export default function ClimbCard({ routes }) {
   }
 
   return (
-    <Card>
+    <Card className="shadow-xl">
       <CardHeader>
         <CardTitle>Climb</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
+        <Input placeholder="Your name" />
         <div className="flex flex-row space-x-2">
           <Select value={selectedRoute} onValueChange={setSelectedRoute}>
             <SelectTrigger className="w-full">
