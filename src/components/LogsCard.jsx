@@ -90,7 +90,7 @@ export default function LogsCard({ logs }) {
   return (
     <Card className="w-full shadow-xl">
       <CardHeader>
-        <CardTitle>Logbook</CardTitle>
+        <CardTitle className="text-neutral-800">Logbook</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex space-x-4 mb-4">
