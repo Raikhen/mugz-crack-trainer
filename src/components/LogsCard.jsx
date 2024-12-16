@@ -47,7 +47,7 @@ export default function LogsCard({ logs }) {
         }
         return 0
       })
-  }, [climberFilter, routeFilter, sortConfig])
+  }, [climberFilter, logs, routeFilter, sortConfig.direction, sortConfig.key])
 
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage

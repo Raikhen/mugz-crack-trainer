@@ -22,10 +22,12 @@
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
+    "react-youtube": "^10.1.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
