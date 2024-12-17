@@ -90,7 +90,7 @@ export default function ClimbCard({ routes }) {
         <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" />
         <div className="flex flex-row gap-3 w-full">
           <Select value={selectedRoute} onValueChange={setSelectedRoute}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full overflow-hidden">
               <SelectValue placeholder="Select route" />
             </SelectTrigger>
             <SelectContent className="w-full">
