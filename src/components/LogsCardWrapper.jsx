@@ -3,11 +3,15 @@ import LogsCard from "./LogsCard";
 import { collection, onSnapshot } from "firebase/firestore";
 import db from "@/lib/firebase/firestore";
 import { useEffect, useState } from "react";
+import { signInAnonymously } from "firebase/auth";
+import { auth } from "@/lib/firebase/config";
 
 export default function LogsCardWrapper({ logs, routes }) {
   const [updatedLogs, setLogs] = useState(logs);
 
-  useEffect(() => {
+  const f = function() {
+    signInAnonymously(auth);
+
     const logsRef = collection(db, "logs");
 
     const unsubscribe = onSnapshot(logsRef, (snapshot) => {
@@ -23,6 +27,10 @@ export default function LogsCardWrapper({ logs, routes }) {
     });
 
     return () => unsubscribe();
+  }
+
+  useEffect(() => {
+    return f()
   }, [routes]);
 
   return <LogsCard logs={updatedLogs} />;

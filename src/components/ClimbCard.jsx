@@ -15,10 +15,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import RouteVisualizer from "./RouteVisualizer";
+import { useEffect } from "react";
+import { signInAnonymously } from "firebase/auth";
+import { auth } from "../lib/firebase/config";
 
 async function startClimb(routeId) {
-  console.log('Climbing started');
-
   const routesRef = collection(db, "routes");
   const routeDocRef = doc(db, "routes", routeId);
 
@@ -36,8 +37,6 @@ async function startClimb(routeId) {
 }
 
 async function finishClimb(routeId, climber) {
-  console.log('Climbing finished');
-
   // Save log
   const routesRef = collection(db, "routes");
   const routeDoc = await getDoc(doc(routesRef, routeId));
@@ -67,6 +66,10 @@ export default function ClimbCard({ routes }) {
   const [name, setName] = useState("");
   const [selectedRoute, setSelectedRoute] = useState("");
   const [isClimbing, setIsClimbing] = useState(false);
+
+  useEffect(() => {
+    signInAnonymously(auth);
+  }, []);
 
   const buttonHandle = () => {
     if (isClimbing) {

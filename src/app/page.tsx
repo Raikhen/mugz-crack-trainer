@@ -1,7 +1,9 @@
 import Dashboard from "@/components/Dashboard";
 import Image from "next/image";
 
-import db from "../lib/firebase/firestore";
+import db from "@/lib/firebase/firestore";
+import { auth } from "@/lib/firebase/config";
+import { signInAnonymously } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 
 // Load cool font for title
@@ -46,6 +48,9 @@ async function fetchLogs() {
 }
 
 export default async function Home() {
+  // Sign in anonymously
+  await signInAnonymously(auth);
+
   const routes : Route[] = await fetchRoutes();
   const logs : Log[] = await fetchLogs();
 

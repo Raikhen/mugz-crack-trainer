@@ -20,8 +20,8 @@ export default function StokeCard() {
   const randomVideo = videos[Math.floor(Math.random() * videos.length)]
 
   return (
-    <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl lg:block hidde">
-      <iframe src={`https://www.youtube.com/embed/${randomVideo}`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl lg:block hidden">
+      <iframe src={`https://www.youtube.com/embed/${randomVideo}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
     </div>
   );
 }

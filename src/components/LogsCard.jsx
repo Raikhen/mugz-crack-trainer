@@ -64,8 +64,6 @@ export default function LogsCard({ logs }) {
   }
 
   const handleClimberSelect = (climber) => {
-    console.log(climber);
-
     if (climberFilter !== climber) {
       setClimberFilter(climber);
     } else {
@@ -76,8 +74,6 @@ export default function LogsCard({ logs }) {
   }
 
   const handleRouteSelect = (route) => {
-    console.log(route);
-
     if (routeFilter !== route) {
       setRouteFilter(route);
     } else {
