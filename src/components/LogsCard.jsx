@@ -24,7 +24,7 @@ export default function LogsCard({ logs }) {
   const [routeFilter, setRouteFilter] = useState("")
   const [sortConfig, setSortConfig] = useState({ key: "date", direction: "desc" })
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 10
+  const itemsPerPage = 5
   const [climbersPopoverOpen, setClimbersPopoverOpen] = useState(false);
   const [routesPopoverOpen, setRoutesPopoverOpen] = useState(false);
 

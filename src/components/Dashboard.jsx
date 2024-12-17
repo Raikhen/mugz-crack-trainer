@@ -1,5 +1,5 @@
 import ClimbCard from "./ClimbCard";
-import LogsCard from "./LogsCard";
+import LogsCardWrapper from "./LogsCardWrapper";
 import StokeCard from "./StokeCard";
 
 export default function Dashboard({ routes, logs }) {
@@ -12,7 +12,7 @@ export default function Dashboard({ routes, logs }) {
             <StokeCard />
           </div>
           <div className="lg:w-1/2">
-            <LogsCard logs={logs}/>
+            <LogsCardWrapper logs={logs} routes={routes} />
           </div>
         </div>
       </div>

@@ -1,11 +1,8 @@
-"use client";
 import Dashboard from "@/components/Dashboard";
 import Image from "next/image";
 
 import db from "../lib/firebase/firestore";
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { LoadingCard } from "@/components/LoadingCard";
 
 // Load cool font for title
 import { Bungee } from 'next/font/google'
@@ -48,16 +45,9 @@ async function fetchLogs() {
   }));
 }
 
-export default function Home() {
-  const [routes, setRoutes] = useState<Route[]>([])
-  const [logs, setLogs] = useState<Log[]>([])
-
-  useEffect(() => {
-    fetchRoutes().then((routes) => setRoutes(routes));
-    fetchLogs().then((logs) => setLogs(logs));
-  }, []);
-
-  const loading = routes.length === 0 || logs.length === 0;
+export default async function Home() {
+  const routes : Route[] = await fetchRoutes();
+  const logs : Log[] = await fetchLogs();
 
   return (
     <div className="flex flex-col">
@@ -70,15 +60,10 @@ export default function Home() {
       />
       <header className="fixed min-w-full flex items-center justify-center px-4 py-4 border-b shadow-xl lg:px-6 text-center bg-white">
         <h1 className={`text-xl font-bold sm:text-2xl text-neutral-800 ${font.className}`}>
-          Mugz Crack Trainer
+          <span className="text-3xl">⛰️</span> &nbsp; Mugz Crack Trainer &nbsp; <span className="text-3xl">⛰️</span>
         </h1>
       </header>
-      {loading ?
-        <div className="w-full flex items-center justify-center mt-20 p-6 lg:p-10">
-            <LoadingCard text="Fetching data..." />
-        </div> :
-        <Dashboard routes={routes} logs={logs} />
-      }
+      <Dashboard routes={routes} logs={logs} />
     </div>
   );
 }
