@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 
 const videos = [
   'vDxkxEwobRg', // Jordan's send of Desert Gold
