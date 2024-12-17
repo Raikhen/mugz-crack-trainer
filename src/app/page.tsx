@@ -20,6 +20,7 @@ interface Log {
   id: string,
   climber: string,
   date: string,
+  dateNumeric: number,
   route: string,
   laps: number,
 }
@@ -42,6 +43,7 @@ async function fetchLogs() {
     id: doc.id,
     climber: doc.data().climber,
     date: doc.data().date.toDate().toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: '2-digit' }),
+    dateNumeric: doc.data().date.toDate().getTime(),
     route: routes.find((route : Route) => route.id === doc.data().route.id)?.name,
     laps: doc.data().laps,
   }));

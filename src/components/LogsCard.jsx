@@ -39,10 +39,16 @@ export default function LogsCard({ logs }) {
           entry.route.toLowerCase().includes(routeFilter.toLowerCase())
       )
       .sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
+        let key = sortConfig.key;
+        
+        if (key === "date") {
+          key = "dateNumeric";
+        }
+
+        if (a[key] < b[key]) {
           return sortConfig.direction === "asc" ? -1 : 1
         }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
+        if (a[key] > b[key]) {
           return sortConfig.direction === "asc" ? 1 : -1
         }
         return 0

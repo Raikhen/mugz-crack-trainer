@@ -20,6 +20,7 @@ export default function LogsCardWrapper({ logs, routes }) {
         climber: doc.data().climber,
         route: routes.find((route) => route.id === doc.data().route.id)?.name,
         date: doc.data().date.toDate().toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: '2-digit' }),
+        dateNumeric: doc.data().date.toDate().getTime(),
         laps: doc.data().laps,
       }));
 
