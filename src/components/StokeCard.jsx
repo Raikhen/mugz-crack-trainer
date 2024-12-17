@@ -1,3 +1,5 @@
+"use client";
+
 const videos = [
   'vDxkxEwobRg', // Jordan's send of Desert Gold
   'AFa1qpldmiM', // Potter's solo of Separate Reality
