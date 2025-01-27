@@ -14,7 +14,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import RouteVisualizer from "./RouteVisualizer";
+// import RouteVisualizer from "./RouteVisualizer";
 import { useEffect } from "react";
 import { signInAnonymously } from "firebase/auth";
 import { auth } from "../lib/firebase/config";
@@ -98,7 +98,7 @@ export default function ClimbCard({ routes }) {
                 <SelectItem key={route.id} value={route.id}>
                   <div className="flex flex-row items-center justify-between gap-3 min-w-[300px]">
                     <div className="text-left text-nowrap">{route.name}</div>
-                    <RouteVisualizer className="w-full" route={route} />
+                    {/*<RouteVisualizer className="w-full" route={route} />*/}
                   </div>
                 </SelectItem>
               ))}
